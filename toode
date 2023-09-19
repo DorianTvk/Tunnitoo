@@ -1,0 +1,36 @@
+// Loome toote objekti
+var toode = {
+    nimetus: "Nutitelefon",
+    hind: 599.99,
+    kogus: 10,
+
+    // Meetod, mis arvutab toote koguhinna
+    koguhind: function () {
+        return this.hind * this.kogus;
+    },
+
+    // Meetod, mis muudab toote kogust
+    muudaKogus: function (uusKogus) {
+        this.kogus = uusKogus;
+    },
+
+    // Meetod, mis kuvab objekti sisu sõne malli kasutades
+    kuvamine: function () {
+        return `Toode: ${this.nimetus}, Hind: ${this.hind} EUR, Kogus: ${this.kogus}`;
+    }
+};
+
+// Kuva objekti omadused konsoolis
+console.log("Toote nimetus:", toode.nimetus);
+console.log("Toote hind:", toode.hind);
+console.log("Toote kogus:", toode.kogus);
+
+// Kuvame toote koguhinna konsoolis
+console.log("Toote koguhind:", toode.koguhind());
+
+// Muudame toote kogust
+toode.muudaKogus(5);
+console.log("Toote uus kogus:", toode.kogus);
+
+// Kuvame objekti sisu kasutades sõne malli
+console.log(toode.kuvamine());
