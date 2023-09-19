@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Veebileht</title>
+</head>
+<body>
+    <!-- Lisamine -->
+    <input type="text" id="uusObjekt" placeholder="Uus objekt">
+    <button id="lisaNupp">Lisa</button>
+    
+    <!-- Muutmine -->
+    <input type="text" id="muudaObjekt" placeholder="Muuda objekti teksti">
+    <button id="muudaNupp">Muuda</button>
+
+    <!-- Kustutamine -->
+    <button id="kustutaNupp">Kustuta valitud objektid</button>
+
+    <!-- Otsimine -->
+    <input type="text" id="otsiTekst" placeholder="Otsi objekte">
+    <button id="otsiNupp">Otsi</button>
+
+    <ul id="objektideNimekiri">
+        <!-- Objektide nimekiri kuvatakse siin -->
+    </ul>
+
+    <script>
+        document.getElementById("lisaNupp").addEventListener("click", function () {
+            var uusObjektTekst = document.getElementById("uusObjekt").value;
+            if (uusObjektTekst) {
+                var uusObjektElement = document.createElement("li");
+                uusObjektElement.textContent = uusObjektTekst;
+                document.getElementById("objektideNimekiri").appendChild(uusObjektElement);
+                document.getElementById("uusObjekt").value = "";
+            }
+        });
+
+        document.getElementById("muudaNupp").addEventListener("click", function () {
+            var muudaObjektTekst = document.getElementById("muudaObjekt").value;
+            if (muudaObjektTekst) {
+                var objektideNimekiri = document.getElementById("objektideNimekiri");
+                var valitudObjekt = objektideNimekiri.querySelector("li");
+                if (valitudObjekt) {
+                    valitudObjekt.textContent = muudaObjektTekst;
+                    document.getElementById("muudaObjekt").value = "";
+                }
+            }
+        });
+
+        document.getElementById("kustutaNupp").addEventListener("click", function () {
+            var objektideNimekiri = document.getElementById("objektideNimekiri");
+            var valitudObjektid = objektideNimekiri.querySelectorAll("li");
+            valitudObjektid.forEach(function (objekt) {
+                objekt.parentNode.removeChild(objekt);
+            });
+        });
+
+        document.getElementById("otsiNupp").addEventListener("click", function () {
+            var otsiTekst = document.getElementById("otsiTekst").value.toLowerCase();
+            var objektideNimekiri = document.getElementById("objektideNimekiri");
+            var objektid = objektideNimekiri.querySelectorAll("li");
+
+            objektid.forEach(function (objekt) {
+                var objektTekst = objekt.textContent.toLowerCase();
+                if (objektTekst.indexOf(otsiTekst) !== -1) {
+                    objekt.style.display = "block";
+                } else {
+                    objekt.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
